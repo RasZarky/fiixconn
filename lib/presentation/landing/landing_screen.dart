@@ -1,4 +1,5 @@
 import 'package:fiixconn/presentation/authenttication/login_screen.dart';
+import 'package:fiixconn/presentation/authenttication/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -61,6 +62,12 @@ class LandingScreen extends StatelessWidget {
                   const SizedBox(width: 20,),
                   Expanded(
                     child: CustomButton(
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                        );
+                      },
                       text: 'Sign Up',
                       buttonColor: Color(0xFF003366),
                       textColor: Color(0xFFFFFFFF),

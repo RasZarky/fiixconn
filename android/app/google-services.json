@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1001596513134",
+    "project_id": "fiixconn",
+    "storage_bucket": "fiixconn.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001596513134:android:e2e4cada96870fa1f7ef7f",
+        "android_client_info": {
+          "package_name": "com.example.fiixconn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaHGBaoPklkGrcd3_Kiw-yWwFxuWOoadI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
