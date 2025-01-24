@@ -5,24 +5,20 @@ import 'package:flutter_svg/svg.dart';
 import 'circle_image_animation.dart';
 
 class ActionsToolbar extends StatelessWidget {
-  // Full dimensions of an action
-  static const double ActionWidgetSize = 60.0;
+  static const double actionWidgetSize = 60.0;
 
-// The size of the icon showen for Social Actions
-  static const double ActionIconSize = 35.0;
+  static const double actionIconSize = 35.0;
 
-// The size of the share social icon
-  static const double ShareActionIconSize = 25.0;
+  static const double shareActionIconSize = 25.0;
 
-// The size of the profile image in the follow Action
-  static const double ProfileImageSize = 50.0;
+  static const double profileImageSize = 50.0;
 
   final String numLikes;
   final String numComments;
   final String userPic;
   final String numForward;
 
-  ActionsToolbar(this.numLikes, this.numComments, this.userPic, this.numForward);
+  const ActionsToolbar(this.numLikes, this.numComments, this.userPic, this.numForward, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +38,7 @@ class ActionsToolbar extends StatelessWidget {
   }
 
   Widget _getSocialAction(
-      {required String title, required String icon, bool isShare = false}) {
+      {required String title, required String icon}) {
     return Container(
         margin: EdgeInsets.only(top: 15.0),
         child: Column(children: [
@@ -67,9 +63,9 @@ class ActionsToolbar extends StatelessWidget {
   Widget _getProfilePicture(userPic) {
     return Container(
         padding:
-            EdgeInsets.all(1.0), // Add 1.0 point padding to create border
-        height: ProfileImageSize, // ProfileImageSize = 50.0;
-        width: ProfileImageSize, // ProfileImageSize = 50.0;
+            EdgeInsets.all(1.0),
+        height: profileImageSize,
+        width: profileImageSize,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(30)),
@@ -78,7 +74,7 @@ class ActionsToolbar extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: userPic,
               placeholder: (context, url) =>
-                  new CircularProgressIndicator(),
+                  CircularProgressIndicator(),
               errorWidget: (context, url, error) => Icon(Icons.error),
             )));
   }
@@ -98,8 +94,8 @@ class ActionsToolbar extends StatelessWidget {
   Widget _getMusicPlayerAction(userPic) {
     return Container(
         margin: EdgeInsets.only(top: 10.0),
-        width: ActionWidgetSize,
-        height: ActionWidgetSize,
+        width: actionWidgetSize,
+        height: actionWidgetSize,
         child:
         Image.asset(
           'assets/images/mini-music-sqaure.png'
