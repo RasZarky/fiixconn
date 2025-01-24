@@ -2,6 +2,7 @@ import 'package:fiixconn/presentation/authenttication/forgot_password_screen.dar
 import 'package:fiixconn/presentation/authenttication/sign_up_screen.dart';
 import 'package:fiixconn/presentation/components/custom_button.dart';
 import 'package:fiixconn/presentation/components/custom_textfeild.dart';
+import 'package:fiixconn/presentation/feed/feed_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -37,11 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
         if (user!.emailVerified) {
 
-          //   Navigator.of(context, rootNavigator: true).push(
-          //     MaterialPageRoute(
-          //       builder: (_) => const Feed(),
-          //     ),
-          //   );
+            Navigator.of(context, rootNavigator: true).push(
+              MaterialPageRoute(
+                builder: (_) => const FeedScreen(),
+              ),
+             );
 
         } else {
           context.loaderOverlay.hide();

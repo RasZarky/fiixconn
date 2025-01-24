@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:fiixconn/presentation/feed/feed_screen.dart';
 import 'package:fiixconn/presentation/landing/landing_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,11 +13,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance; // Initialize FirebaseAuth
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 5), () {
-      if (mounted) {
+    Timer(const Duration(seconds: 5), () async {
+      final user = _auth.currentUser; // Check for current user
+      if (mounted && user != null) {
+        // User is logged in, navigate to FeedPage
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => FeedScreen()),
+        );
+      } else {
+        // User is not logged in, navigate to LandingScreen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const LandingScreen()),
