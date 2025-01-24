@@ -54,7 +54,7 @@ class Video {
   }
 
   Future<Null> loadController() async {
-    controller = VideoPlayerController.network(url);
+    controller = VideoPlayerController.asset(url);
     await controller?.initialize();
     controller?.setLooping(true);
   }

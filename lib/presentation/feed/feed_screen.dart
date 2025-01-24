@@ -3,7 +3,6 @@ import 'package:fiixconn/presentation/feed/Widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:video_player/video_player.dart';
 import '../../data/video.dart';
 import 'Widgets/actions_toolbar.dart';
@@ -17,10 +16,13 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
+
+  int videoPlaying = 0;
+
   @override
   void initState() {
+    loadVideo(0);
     loadVideo(1);
-    loadVideo(2);
 
     super.initState();
   }
@@ -29,6 +31,9 @@ class _FeedScreenState extends State<FeedScreen> {
     if (videos.length > index) {
       await videos[index].loadController();
       videos[index].controller?.play();
+      setState(() {
+        videoPlaying = index;
+      });
     }
   }
 
@@ -37,7 +42,7 @@ class _FeedScreenState extends State<FeedScreen> {
     return Scaffold(
       body: feedVideos(),
       bottomNavigationBar: BottomBar(
-        context: context,
+        context: context, pause: videos[videoPlaying].controller!.pause(),
       ),
     );
   }
@@ -162,8 +167,7 @@ var data = [
   {
     "id": "1",
     "video_title": "Glass of water",
-    "url":
-        "https://firebasestorage.googleapis.com/v0/b/videostreaming-test.appspot.com/o/vid%2FSnaptik_6745671851688692998_tiktok.mp4?alt=media&token=e6c76be2-9d8e-4be6-aedc-89ddd4985871",
+    "url": "assets/videos/video1.mp4",
     "comments": "143",
     "shares": "7",
     "likes": "323",
@@ -175,8 +179,7 @@ var data = [
   {
     "id": "2",
     "video_title": "Vacation",
-    "url":
-        "https://firebasestorage.googleapis.com/v0/b/videostreaming-test.appspot.com/o/vid%2FSnaptik_6842407707551599878_carlos-barrios%20(1).mp4?alt=media&token=965f5080-2771-4477-bd9d-defc7b581c5d",
+    "url": "assets/videos/video2.mp4",
     "comments": "143",
     "shares": "45",
     "likes": "67",
@@ -189,8 +192,7 @@ var data = [
     "id": "3",
     "video_title": "Testing my camera",
     "shares": "56",
-    "url":
-        "https://firebasestorage.googleapis.com/v0/b/videostreaming-test.appspot.com/o/vid%2FSnaptik_6856769842385620229_alex.mp4?alt=media&token=b70d853b-760a-45ee-b5d3-44cef7e4db7f",
+    "url": "assets/videos/video3.mp4",
     "comments": "143",
     "likes": "32",
     "song_name": "Song 3 - Artist 3",

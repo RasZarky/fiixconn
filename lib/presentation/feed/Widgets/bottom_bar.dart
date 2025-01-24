@@ -11,7 +11,8 @@ import '../../authenttication/login_screen.dart';
 
 class BottomBar extends StatelessWidget {
    final BuildContext context;
-   BottomBar({super.key, required this.context});
+   final Future<void> pause;
+   BottomBar({super.key, required this.context, required this.pause});
 
    final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -34,6 +35,14 @@ class BottomBar extends StatelessWidget {
        );
        print('Error signing out: $e');
      }
+   }
+
+   Future<void> _goToMiniApp() async {
+      pause;
+     Navigator.push(
+       context,
+       MaterialPageRoute(builder: (context) => const MiniAppsScreen()),
+     );
    }
 
   @override
@@ -79,10 +88,7 @@ class BottomBar extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           switch (index) {
-          case 0:  Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const MiniAppsScreen()),
-          );
+          case 0:  _goToMiniApp();
           case 3: _signOut();
           }
         },

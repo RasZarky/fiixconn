@@ -198,9 +198,14 @@ class _MiniAppsScreenState extends State<MiniAppsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SvgPicture.asset(
-                    'assets/svg/arrow-left.svg',
-                    color: isDark ? Color(0xFFE1E7EF) : Color(0xFF1E293B),
+                  GestureDetector(
+                    onTap: (){ if(Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    }},
+                    child: SvgPicture.asset(
+                      'assets/svg/arrow-left.svg',
+                      color: isDark ? Color(0xFFE1E7EF) : Color(0xFF1E293B),
+                    ),
                   ),
                   Text(
                     'Mini Apps',

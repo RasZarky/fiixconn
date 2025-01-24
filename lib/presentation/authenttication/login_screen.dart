@@ -114,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [GestureDetector(
-                      onTap: (){ Navigator.pop(context);},
+                      onTap: (){ if(Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                      }},
                         child: SvgPicture.asset('assets/svg/arrow-left.svg'))],
                   ),
                 ),
