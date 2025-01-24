@@ -1,7 +1,9 @@
 import 'package:fiixconn/presentation/feed/Widgets/bottom_bar.dart';
 import 'package:fiixconn/presentation/feed/Widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:video_player/video_player.dart';
 import '../../data/video.dart';
 import 'Widgets/actions_toolbar.dart';
@@ -17,8 +19,8 @@ class FeedScreen extends StatefulWidget {
 class _FeedScreenState extends State<FeedScreen> {
   @override
   void initState() {
-    loadVideo(0);
     loadVideo(1);
+    loadVideo(2);
 
     super.initState();
   }
@@ -34,7 +36,9 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: feedVideos(),
-      bottomNavigationBar: BottomBar(context: context,),
+      bottomNavigationBar: BottomBar(
+        context: context,
+      ),
     );
   }
 }
@@ -117,11 +121,21 @@ Widget videoCard(Video video) {
               )),
             )
           : Container(
-              color: Colors.black,
-              child: Center(
-                child: Text("Loading"),
+            color: Colors.black,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Loading", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+                  SizedBox(height: 8,),
+                  SpinKitCubeGrid(
+                    color: Colors.white,
+                    size: 50.0,
+                  ),
+                ],
               ),
             ),
+          ),
       Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[

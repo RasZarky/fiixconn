@@ -225,19 +225,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: CustomButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
-              },
-              text: 'Already have an account?',
-              borderColor: Color(0xFFE5E7EB),
-              buttonColor: Colors.transparent,
-            )),
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: CustomButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                text: 'Already have an account?',
+                borderColor: Color(0xFFE5E7EB),
+                buttonColor: Colors.transparent,
+              )),
+        ),
       ),
     );
   }

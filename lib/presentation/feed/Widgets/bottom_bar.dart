@@ -1,16 +1,45 @@
 import 'dart:io';
 
 import 'package:fiixconn/presentation/miniApps/mini_apps_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../authenttication/login_screen.dart';
 
 
 class BottomBar extends StatelessWidget {
    final BuildContext context;
-   const BottomBar({super.key, required this.context});
+   BottomBar({super.key, required this.context});
+
+   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+   Future<void> _signOut() async {
+     try {
+       await _auth.signOut();
+       Navigator.pushAndRemoveUntil(
+         context,
+         MaterialPageRoute(builder: (context) => LoginScreen()),
+         (Route<dynamic> route) => false,
+       );
+     } catch (e) {
+       Fluttertoast.showToast(
+         msg: 'Error signing out: $e',
+         toastLength: Toast.LENGTH_LONG,
+         gravity: ToastGravity.SNACKBAR,
+         backgroundColor: Colors.red,
+         textColor: Colors.white,
+         fontSize: 14.0,
+       );
+       print('Error signing out: $e');
+     }
+   }
 
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
       height: 94,
       decoration:
@@ -20,21 +49,23 @@ class BottomBar extends StatelessWidget {
           SizedBox(
             height: 5,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              menuButton('Mini Apps', 'assets/svg/layer.svg', 0, context),
-              menuButton('Messages', 'assets/svg/chat.svg', 1, context),
-              SizedBox(
-                width: 15,
-              ),
-              SvgPicture.asset('assets/svg/add-square.svg'),
-              SizedBox(
-                width: 15,
-              ),
-              menuButton('Notifications', 'assets/svg/notification.svg', 2, context),
-              menuButton('Profile', 'assets/svg/profile.svg', 3, context)
-            ],
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                menuButton('Mini Apps', 'assets/svg/layer.svg', 0, context),
+                menuButton('Messages', 'assets/svg/chat.svg', 1, context),
+                SizedBox(
+                  width: 15,
+                ),
+                SvgPicture.asset('assets/svg/add-square.svg'),
+                SizedBox(
+                  width: 15,
+                ),
+                menuButton('Notifications', 'assets/svg/notification.svg', 2, context),
+                menuButton('Profile', 'assets/svg/profile.svg', 3, context)
+              ],
+            ),
           ),
           SizedBox(
             height: Platform.isIOS ? 40 : 10,
@@ -52,6 +83,7 @@ class BottomBar extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => const MiniAppsScreen()),
           );
+          case 3: _signOut();
           }
         },
         child: SizedBox(

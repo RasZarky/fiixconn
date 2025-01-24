@@ -38,11 +38,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
         if (user!.emailVerified) {
 
-            Navigator.of(context, rootNavigator: true).push(
-              MaterialPageRoute(
-                builder: (_) => const FeedScreen(),
-              ),
-             );
+          Fluttertoast.showToast(
+            msg: "Click profile on bottom nav to logout",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 14.0,
+          );
+
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => FeedScreen()),
+                (Route<dynamic> route) => false,
+          );
 
         } else {
           context.loaderOverlay.hide();
@@ -105,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [GestureDetector(
-                      onTap: (){Navigator.pop(context);},
+                      onTap: (){ Navigator.pop(context);},
                         child: SvgPicture.asset('assets/svg/arrow-left.svg'))],
                   ),
                 ),
@@ -206,19 +215,21 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: CustomButton(
-              onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignUpScreen()),
-                );
-              },
-              text: 'Create new account',
-              borderColor: Color(0xFFE5E7EB),
-              buttonColor: Colors.transparent,
-            )),
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: CustomButton(
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                  );
+                },
+                text: 'Create new account',
+                borderColor: Color(0xFFE5E7EB),
+                buttonColor: Colors.transparent,
+              )),
+        ),
       ),
     );
   }

@@ -136,19 +136,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: CustomButton(
-              onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignUpScreen()),
-                );
-              },
-              text: 'Log In',
-              borderColor: Color(0xFFE5E7EB),
-              buttonColor: Colors.transparent,
-            )),
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: CustomButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                text: 'Log In',
+                borderColor: Color(0xFFE5E7EB),
+                buttonColor: Colors.transparent,
+              )),
+        ),
       ),
     );
   }
