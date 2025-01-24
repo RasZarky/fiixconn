@@ -15,9 +15,11 @@ class FeedScreen extends StatefulWidget {
   State<FeedScreen> createState() => _FeedScreenState();
 }
 
+int videoPlaying = 0;
+
 class _FeedScreenState extends State<FeedScreen> {
 
-  int videoPlaying = 0;
+
 
   @override
   void initState() {
@@ -63,10 +65,12 @@ Widget feedVideos() {
           if (videos[index].controller == null) {
             await videos[index].loadController();
           }
+          videoPlaying = index;
           videos[index].controller!.play();
 
           if (videos[prevVideo].controller != null) {
             videos[prevVideo].controller!.pause();
+            videoPlaying = prevVideo;
           }
 
           prevVideo = index;
@@ -165,6 +169,18 @@ Widget videoCard(Video video) {
 
 var data = [
   {
+    "id": "2",
+    "video_title": "Vacation",
+    "url": "assets/videos/video2.mp4",
+    "comments": "143",
+    "shares": "45",
+    "likes": "67",
+    "song_name": "falz - How many",
+    "user": "Abdul Razak",
+    "user_pic":
+    "https://i.pinimg.com/originals/5e/eb/8d/5eeb8d615bea040425f9937699392751.jpg"
+  },
+  {
     "id": "1",
     "video_title": "Glass of water",
     "url": "assets/videos/video1.mp4",
@@ -177,18 +193,6 @@ var data = [
         "https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"
   },
   {
-    "id": "2",
-    "video_title": "Vacation",
-    "url": "assets/videos/video2.mp4",
-    "comments": "143",
-    "shares": "45",
-    "likes": "67",
-    "song_name": "falz - How many",
-    "user": "Abdul Razak",
-    "user_pic":
-        "https://i.pinimg.com/originals/5e/eb/8d/5eeb8d615bea040425f9937699392751.jpg"
-  },
-  {
     "id": "3",
     "video_title": "Testing my camera",
     "shares": "56",
@@ -196,7 +200,7 @@ var data = [
     "comments": "143",
     "likes": "32",
     "song_name": "Song 3 - Artist 3",
-    "user": "newUser",
+    "user": "Black Sherif",
     "user_pic":
         "https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"
   },
