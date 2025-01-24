@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:fiixconn/presentation/miniApps/mini_apps_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 
 class BottomBar extends StatelessWidget {
-
-  const BottomBar({Key? key}) : super(key: key);
+   final BuildContext context;
+   const BottomBar({super.key, required this.context});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,8 @@ class BottomBar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              menuButton('Mini Apps', 'assets/svg/layer.svg', 0),
-              menuButton('Messages', 'assets/svg/chat.svg', 1),
+              menuButton('Mini Apps', 'assets/svg/layer.svg', 0, context),
+              menuButton('Messages', 'assets/svg/chat.svg', 1, context),
               SizedBox(
                 width: 15,
               ),
@@ -31,8 +32,8 @@ class BottomBar extends StatelessWidget {
               SizedBox(
                 width: 15,
               ),
-              menuButton('Notifications', 'assets/svg/notification.svg', 2),
-              menuButton('Profile', 'assets/svg/profile.svg', 3)
+              menuButton('Notifications', 'assets/svg/notification.svg', 2, context),
+              menuButton('Profile', 'assets/svg/profile.svg', 3, context)
             ],
           ),
           SizedBox(
@@ -43,9 +44,15 @@ class BottomBar extends StatelessWidget {
     );
   }
 
-  Widget menuButton(String text, String icon, int index) {
+  Widget menuButton(String text, String icon, int index, BuildContext context) {
     return GestureDetector(
         onTap: () {
+          switch (index) {
+          case 0:  Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MiniAppsScreen()),
+          );
+          }
         },
         child: SizedBox(
           width: 80,

@@ -34,7 +34,7 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: feedVideos(),
-      bottomNavigationBar: BottomBar(),
+      bottomNavigationBar: BottomBar(context: context,),
     );
   }
 }
